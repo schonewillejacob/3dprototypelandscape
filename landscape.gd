@@ -1,12 +1,14 @@
 extends Node3D
 
 var land : MeshInstance3D
+var mesh_scale : int
 
 func _ready() -> void:
 	land = MeshInstance3D.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var count : Array[int] = [0]
+	var MESH_SCALE = 20
 	
 	var noise = FastNoiseLite.new()
 	var image = noise.get_image(512, 512)
@@ -16,10 +18,10 @@ func _ready() -> void:
 	
 	for i in range(64):
 		for j in range(64):
-			var noiseVal1 = noise.get_noise_2d(i, j) * 10
-			var noiseVal2 = noise.get_noise_2d(i+1, j) * 10
-			var noiseVal3 = noise.get_noise_2d(i+1, j+1) * 10
-			var noiseVal4 = noise.get_noise_2d(i, j+1) * 10
+			var noiseVal1 = noise.get_noise_2d(i, j) * MESH_SCALE
+			var noiseVal2 = noise.get_noise_2d(i+1, j) * MESH_SCALE
+			var noiseVal3 = noise.get_noise_2d(i+1, j+1) * MESH_SCALE
+			var noiseVal4 = noise.get_noise_2d(i, j+1) * MESH_SCALE
 			
 			
 			
