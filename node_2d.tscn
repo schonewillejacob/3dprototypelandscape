@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvfhxgafa42on"]
 
-[ext_resource type="Script" path="res://node_2d.gd" id="1_5us0a"]
+[ext_resource type="Script" path="res://landscape.gd" id="1_s2x87"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fsb2k"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,7 +16,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_5us0a")
+script = ExtResource("1_s2x87")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
@@ -28,6 +28,6 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.229484, 0.199983, -0.952546, 0.00284509, 0.978798, 0.204809, -0.973308, -0.0442903, 0.225187, -4.68716, 14.4533, 95.8825)
+transform = Transform3D(-0.22156, 0.437227, -0.871633, 0.0598532, 0.89826, 0.43537, -0.973308, -0.0442903, 0.225188, -90.4151, 71.1724, 66.3408)
 current = true
 fov = 39.375
