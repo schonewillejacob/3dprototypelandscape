@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvfhxgafa42on"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_5us0a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fsb2k"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_sae0r"]
+sky_material = SubResource("ProceduralSkyMaterial_fsb2k")
+
+[sub_resource type="Environment" id="Environment_dowpl"]
+background_mode = 2
+sky = SubResource("Sky_sae0r")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_5us0a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dowpl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.229484, 0.199983, -0.952546, 0.00284509, 0.978798, 0.204809, -0.973308, -0.0442903, 0.225187, -4.68716, 14.4533, 95.8825)
+current = true
+fov = 39.375
