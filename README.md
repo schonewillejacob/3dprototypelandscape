@@ -3,5 +3,5 @@
 # Gavin
 - Landscape mesh
 
-#Namya Kamboj
+# Namya Kamboj
 - Add wood-grain texture to landscape mesh
