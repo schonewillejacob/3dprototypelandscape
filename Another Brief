@@ -1,4 +1,4 @@
-Other Brief:
+Another Brief:
 Many other algorithms can be used to generate more natural-looking terrain. I am going to discuss each algorithm in brief:
 1) Perlin Noise and Simplex Noise:
 These algorithms produce realistic patterns by generating random variations that are smooth over a 2D or 3D grid. They work wonderfully to form a landscape's basic contours.
