@@ -1,10 +1,12 @@
 # Assignment 2
-Glider track over landscape
+COMP360, AB1, Group 1
 
-## Features & Assignment:
-Revise Landscape code to map UV: Gavin & Jacob
-Create Spline & 3DSprite representation: Vaishnavi and Namya
-Import and track glider model along Spline: Harjot & Jacob
-Report at and create brief: Karanjit
+## Planned Features
+Revise Landscape mesh UV 		- Gavin and Jacob
+Spline curve and Sprite3D 		- Namya and Vaishnavi
+Glider import and transforms	- Harjot and Jacob
+Breif and report-in 			- Karanjit
 
-Planned completion date for each above features: October 15
+
+
+The features will be touched by October 8th.
