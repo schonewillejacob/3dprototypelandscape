@@ -1,23 +1,30 @@
 extends Node3D
 
-var land : MeshInstance3D
+
+
+# MEMBERS ######################################################################
 var Y_SCALE : float = 20.0
+var UV_BRIGHTNESS_SCALE = 1.0
 var NOISE_TEXTURE_DIMENSIONS = Vector2i(512, 512)
 var GRID_DIMENSIONS = Vector2i(64, 64)
 
+
+
+# VIRTUALS #####################################################################
 func _ready() -> void:
-	var count : Array[int] = [0]
+	var land = MeshInstance3D.new()
 	
-	land = MeshInstance3D.new()
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var material = StandardMaterial3D.new()
+	material.vertex_color_use_as_albedo = true
 	
 	var noise = FastNoiseLite.new()
 	var image = noise.get_image(NOISE_TEXTURE_DIMENSIONS.x, NOISE_TEXTURE_DIMENSIONS.y)
 	var texture = ImageTexture.create_from_image(image)
-	var material = StandardMaterial3D.new()
-	material.albedo_texture = texture
 	
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	var count : Array[int] = [0]
 	for i in range(GRID_DIMENSIONS.x):
 		for j in range(GRID_DIMENSIONS.y):
 			var _noise_1 = noise.get_noise_2d(i, j) 	# bottom-left
@@ -34,6 +41,9 @@ func _ready() -> void:
 	add_child(land)
 	pass 
 
+
+
+# METHODS ######################################################################
 func create_quad(
 	st : SurfaceTool,
 	pt: Vector3,
@@ -43,15 +53,25 @@ func create_quad(
 	noiseVal3,
 	noiseVal4,
 	):
+	
+	var dark_val1 : float = noiseVal1 * UV_BRIGHTNESS_SCALE
+	var dark_val2 : float = noiseVal2 * UV_BRIGHTNESS_SCALE
+	var dark_val3 : float = noiseVal3 * UV_BRIGHTNESS_SCALE
+	var dark_val4 : float = noiseVal4 * UV_BRIGHTNESS_SCALE
+	
+	st.set_color(Color(dark_val1, dark_val1, dark_val1, 1))
 	st.set_uv( Vector2(0, 0) )
 	st.add_vertex(pt + Vector3(0, noiseVal1 * Y_SCALE, 0) ) # vertex 0
 	count[0] += 1
+	st.set_color(Color(dark_val2, dark_val2, dark_val2, 1))
 	st.set_uv( Vector2(1, 0) )
 	st.add_vertex(pt +  Vector3(1, noiseVal2 * Y_SCALE, 0) ) # vertex 1
 	count[0] += 1
+	st.set_color(Color(dark_val3, dark_val3, dark_val3, 1))
 	st.set_uv( Vector2(1, 1) )
 	st.add_vertex(pt +  Vector3(1, noiseVal3 * Y_SCALE, 1) ) # vertex 2
 	count[0] += 1
+	st.set_color(Color(dark_val4, dark_val4, dark_val4, 1))
 	st.set_uv( Vector2(0, 1) )
 	st.add_vertex(pt +  Vector3(0, noiseVal4 * Y_SCALE, 1) ) # vertex 3
 	count[0] += 1
