@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxvdsenc0vi2a"]
 
-[ext_resource type="Script" path="res://landscape.gd" id="1_t0g2w"]
+[ext_resource type="Script" path="res://landscape/landscape.gd" id="1_ispae"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jukki"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -28,4 +28,4 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7453, 11.7815, 68.2665)
 
 [node name="Landscape" type="Node3D" parent="."]
-script = ExtResource("1_t0g2w")
+script = ExtResource("1_ispae")

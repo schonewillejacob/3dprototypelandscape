@@ -1,16 +1,10 @@
-# 3dprototypelandscape
-test2
-# Gavin
-- Landscape mesh
+# Assignment 2
+Glider track over landscape
 
-# Namya Kamboj
-- Add texture to landscape mesh
+## Features & Assignment:
+Revise Landscape code to map UV: Gavin & Jacob
+Create Spline & 3DSprite representation: Vaishnavi and Namya
+Import and track glider model along Spline: Harjot & Jacob
+Report at and create brief: Karanjit
 
-# Harjot
-- Brief
-
-# Vaishnavi
- -Did some research work and made another brief document for more knowledge.
-
-# Jacob
-- Noise work. For example, per vertex albedo mapping.
+Planned completion date for each above features: October 15
