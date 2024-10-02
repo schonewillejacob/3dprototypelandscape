@@ -5,6 +5,7 @@ extends Node3D
 # MEMBERS ######################################################################
 var Y_SCALE : float = 20.0
 var ESTIMATED_NOISE_OFFSET = 0.50 # just toyed with this until the map looked nice.
+var BASE_COLOUR = Vector3(69, 40, 16) # this is stored in a Vector3 to forgo casts
 var NOISE_TEXTURE_DIMENSIONS = Vector2i(256, 256)
 var GRID_DIMENSIONS = Vector2i(256, 256)
 
@@ -61,19 +62,19 @@ func create_quad(
 	var dark_val3 : float = (noiseVal3 + ESTIMATED_NOISE_OFFSET) / 2.0
 	var dark_val4 : float = (noiseVal4 + ESTIMATED_NOISE_OFFSET) / 2.0
 	
-	st.set_color(Color(dark_val1, dark_val1, dark_val1, 1))
+	st.set_color(Color8(int(dark_val1 * BASE_COLOUR.x), int(dark_val1 * BASE_COLOUR.y), int(dark_val1 * BASE_COLOUR.z)))
 	st.set_uv( Vector2(0, 0) )
 	st.add_vertex(pt + Vector3(0, noiseVal1 * Y_SCALE, 0) ) # vertex 0
 	count[0] += 1
-	st.set_color(Color(dark_val2, dark_val2, dark_val2, 1))
+	st.set_color(Color8(int(dark_val2 * BASE_COLOUR.x), int(dark_val2 * BASE_COLOUR.y), int(dark_val2 * BASE_COLOUR.z)))
 	st.set_uv( Vector2(1, 0) )
 	st.add_vertex(pt +  Vector3(1, noiseVal2 * Y_SCALE, 0) ) # vertex 1
 	count[0] += 1
-	st.set_color(Color(dark_val3, dark_val3, dark_val3, 1))
+	st.set_color(Color8(int(dark_val3 * BASE_COLOUR.x), int(dark_val3 * BASE_COLOUR.y), int(dark_val3 * BASE_COLOUR.z)))
 	st.set_uv( Vector2(1, 1) )
 	st.add_vertex(pt +  Vector3(1, noiseVal3 * Y_SCALE, 1) ) # vertex 2
 	count[0] += 1
-	st.set_color(Color(dark_val4, dark_val4, dark_val4, 1))
+	st.set_color(Color8(int(dark_val4 * BASE_COLOUR.x), int(dark_val4 * BASE_COLOUR.y), int(dark_val4 * BASE_COLOUR.z)))
 	st.set_uv( Vector2(0, 1) )
 	st.add_vertex(pt +  Vector3(0, noiseVal4 * Y_SCALE, 1) ) # vertex 3
 	count[0] += 1
