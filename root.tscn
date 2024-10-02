@@ -24,7 +24,7 @@ glow_enabled = true
 [node name="Root" type="Node3D"]
 
 [node name="Clouds" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 5.5, 128)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0.2, 128)
 mesh = SubResource("PlaneMesh_w2wsm")
 script = ExtResource("2_t3g5x")
 
@@ -48,16 +48,16 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Glider" parent="." node_paths=PackedStringArray("camera_rig", "target_path_follower") instance=ExtResource("2_ci8io")]
-transform = Transform3D(-4.37109e-08, 0, -0.99997, 0, 0.999977, 0, 0.999989, 0, -4.37101e-08, 75, 32, 50)
+transform = Transform3D(0.313333, 0, -0.94961, 0, 0.999977, 0, 0.949628, 0, 0.313327, 102, 2, 45)
 camera_rig = NodePath("../CameraRig")
 target_path_follower = NodePath("../Path3D/PathFollow3D")
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 curve = ExtResource("3_xm1ld")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-4.37109e-08, 0, -0.99997, 0, 0.999977, 0, 0.999989, 0, -4.37101e-08, 75, 0, 50)
+transform = Transform3D(0.313333, 0, -0.94961, 0, 0.999977, 0, 0.949628, 0, 0.313327, 102, 0, 45)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
 remote_path = NodePath("../../../Glider")
