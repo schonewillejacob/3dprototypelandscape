@@ -9,7 +9,9 @@ var BASE_COLOUR = Vector3(69, 40, 16) # this is stored in a Vector3 to forgo cas
 var NOISE_TEXTURE_DIMENSIONS = Vector2i(256, 256)
 var GRID_DIMENSIONS = Vector2i(256, 256)
 
+@onready var node_noise_preview_ui : TextureRect = $LandscapeNoisePreview
 
+signal noise_generated(noise : FastNoiseLite)
 
 # VIRTUALS #####################################################################
 func _ready() -> void:
@@ -19,10 +21,11 @@ func _ready() -> void:
 	material.vertex_color_use_as_albedo = true
 	
 	var noise = FastNoiseLite.new()
+	noise_generated.emit(noise) # added for couplinmg w/ clouds node
 	var image = noise.get_image(NOISE_TEXTURE_DIMENSIONS.x, NOISE_TEXTURE_DIMENSIONS.y)
 	
 	var texture = ImageTexture.create_from_image(image)
-	$"../TextureRect".texture = texture
+	node_noise_preview_ui.texture = texture
 	
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
