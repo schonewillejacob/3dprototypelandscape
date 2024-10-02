@@ -4,9 +4,9 @@ extends Node3D
 
 # MEMBERS ######################################################################
 var Y_SCALE : float = 20.0
-var UV_BRIGHTNESS_SCALE = 1.0
-var NOISE_TEXTURE_DIMENSIONS = Vector2i(512, 512)
-var GRID_DIMENSIONS = Vector2i(64, 64)
+var ESTIMATED_NOISE_OFFSET = 0.50 # just toyed with this until the map looked nice.
+var NOISE_TEXTURE_DIMENSIONS = Vector2i(256, 256)
+var GRID_DIMENSIONS = Vector2i(256, 256)
 
 
 
@@ -19,7 +19,9 @@ func _ready() -> void:
 	
 	var noise = FastNoiseLite.new()
 	var image = noise.get_image(NOISE_TEXTURE_DIMENSIONS.x, NOISE_TEXTURE_DIMENSIONS.y)
+	
 	var texture = ImageTexture.create_from_image(image)
+	$"../TextureRect".texture = texture
 	
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -53,11 +55,11 @@ func create_quad(
 	noiseVal3,
 	noiseVal4,
 	):
-	
-	var dark_val1 : float = noiseVal1 * UV_BRIGHTNESS_SCALE
-	var dark_val2 : float = noiseVal2 * UV_BRIGHTNESS_SCALE
-	var dark_val3 : float = noiseVal3 * UV_BRIGHTNESS_SCALE
-	var dark_val4 : float = noiseVal4 * UV_BRIGHTNESS_SCALE
+	# noise from FastNoiseLite.get_noise_2d(x,y) is always (-1,1)
+	var dark_val1 : float = (noiseVal1 + ESTIMATED_NOISE_OFFSET) / 2.0
+	var dark_val2 : float = (noiseVal2 + ESTIMATED_NOISE_OFFSET) / 2.0
+	var dark_val3 : float = (noiseVal3 + ESTIMATED_NOISE_OFFSET) / 2.0
+	var dark_val4 : float = (noiseVal4 + ESTIMATED_NOISE_OFFSET) / 2.0
 	
 	st.set_color(Color(dark_val1, dark_val1, dark_val1, 1))
 	st.set_uv( Vector2(0, 0) )
