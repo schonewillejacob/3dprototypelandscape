@@ -1,16 +1,19 @@
-# 3dprototypelandscape
-test2
-# Gavin
-- Landscape mesh
+# Assignment 2
+COMP360, AB1, Group 1
 
-# Namya Kamboj
-- Add texture to landscape mesh
+## Planned Features
+Gavin
+Namya
+Harjot
+Vaishnavi
+Jacob
+Karan
 
-# Harjot
-- Brief
+Revise Landscape mesh UV 		- Gavin and Jacob
+Spline curve and Sprite3D 		- Namya and Vaishnavi
+Glider import and transforms	- Harjot and Jacob
+Breif and report-in 			- Karanjit
 
-# Vaishnavi
- -Did some research work and made another brief document for more knowledge.
 
-# Jacob
-- Noise work. For example, per vertex albedo mapping.
+
+The features will be touched by October 8th.
