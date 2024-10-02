@@ -9,7 +9,7 @@ extends Node3D
 
 var SPEED = 0.01
 var log_progess_timer = Timer.new()
-@export var debug_timer = true
+@export var debug_timer = false
 
 
 
@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 # METHODS ######################################################################
 func push_partial_transform_to_camera() -> void:
 	if camera_rig: 
-		camera_rig.transform.basis = transform.basis
+		camera_rig.rotation.y = rotation.y
 		camera_rig.global_position = global_position
 
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://d0pbooty3jhku"]
+[gd_scene load_steps=6 format=4 uid="uid://d0pbooty3jhku"]
 
 [ext_resource type="Script" path="res://glider/glider.gd" id="1_c1lgt"]
+[ext_resource type="Material" uid="uid://corji3hplnbm2" path="res://glider/glider_material.tres" id="2_oqo5b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u3x6k"]
 resource_name = "glaze"
@@ -48,5 +49,6 @@ script = ExtResource("1_c1lgt")
 
 [node name="GliderMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.001, -1.50996e-10, 6.60024e-18, 0, -4.37114e-11, -0.001, 1.50996e-10, -0.001, 4.37114e-11, 0, 0, 0)
+material_override = ExtResource("2_oqo5b")
 mesh = SubResource("ArrayMesh_bsvpe")
 skeleton = NodePath("")
