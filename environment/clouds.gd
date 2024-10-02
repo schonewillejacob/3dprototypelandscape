@@ -5,7 +5,7 @@ extends MeshInstance3D
 # MEMBERS ######################################################################
 @onready var node_noise_preview_ui = $CloudNoisePreview
 const NOISE_DIMENSIONS = Vector2i(256, 256)
-var HEIGHT = transform.origin.y
+var HEIGHT = 1.0 / (transform.origin.y * 2.0)
 
 
 # HELPERS ######################################################################
@@ -28,21 +28,22 @@ func generate_blended_clouds(landscape_noise : FastNoiseLite):
 			if _noise_sample > _noise_limits.y: _noise_limits.y = _noise_sample
 	var _noise_range = _noise_limits.y - _noise_limits.x
 	
+	# create cloud image
 	for _x in NOISE_DIMENSIONS.x:
 		for _y in NOISE_DIMENSIONS.y:
 			var _noise_sample = landscape_noise.get_noise_2d(_x, _y)
 			var _noise_color : Color
-			if _noise_sample > 0.15: 
+			if _noise_sample > HEIGHT: 
 				# above certain noise height, we lighten the clouds to make them appear bunched against hilltops
 				_noise_color = Color(Color.SLATE_GRAY, 
-									(_noise_sample + abs(_noise_limits.x)) / ((_noise_range * 4.0) - (_noise_sample * 5.0))
+									(_noise_sample + abs(_noise_limits.x)) / ((_noise_range * 16.0) - (30.0 * (_noise_sample - HEIGHT)))
 									)
 			else:
-				_noise_color = Color(Color.SLATE_GRAY, (_noise_sample + abs(_noise_limits.x)) / (_noise_range * 4.0))
+				_noise_color = Color(Color.SLATE_GRAY, (_noise_sample + abs(_noise_limits.x)) / (_noise_range * 16.0))
 			
 			_cloud_image.set_pixel(_x, _y, _noise_color)
 	
-	
+	# assign clouds to mesh texture
 	var _noise_texture = ImageTexture.create_from_image(_cloud_image)
 	_cloud_material.albedo_texture = _noise_texture
 	node_noise_preview_ui.texture = _noise_texture
