@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxvdsenc0vi2a"]
+
+[ext_resource type="PackedScene" uid="uid://bqfv48bj7ivrp" path="res://landscape/landscape.tscn" id="1_sxhf2"]
+[ext_resource type="PackedScene" uid="uid://d0pbooty3jhku" path="res://glider/glider.tscn" id="2_ci8io"]
+[ext_resource type="Script" path="res://environment/clouds.gd" id="2_t3g5x"]
+[ext_resource type="Curve3D" uid="uid://cofu0jmgkqhc1" path="res://glider/glider_curve.tres" id="3_xm1ld"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w2wsm"]
+size = Vector2(256, 256)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jukki"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7a6gb"]
+sky_material = SubResource("ProceduralSkyMaterial_jukki")
+
+[sub_resource type="Environment" id="Environment_6sgki"]
+background_mode = 2
+sky = SubResource("Sky_7a6gb")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Root" type="Node3D"]
+
+[node name="Clouds" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 5.5, 128)
+mesh = SubResource("PlaneMesh_w2wsm")
+script = ExtResource("2_t3g5x")
+
+[node name="CloudNoisePreview" type="TextureRect" parent="Clouds"]
+visible = false
+offset_left = 32.0
+offset_top = 160.0
+offset_right = 128.0
+offset_bottom = 256.0
+expand_mode = 1
+
+[node name="Landscape" parent="." instance=ExtResource("1_sxhf2")]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_6sgki")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Glider" parent="." node_paths=PackedStringArray("camera_rig", "target_path_follower") instance=ExtResource("2_ci8io")]
+transform = Transform3D(-4.37109e-08, 0, -0.99997, 0, 0.999977, 0, 0.999989, 0, -4.37101e-08, 75, 32, 50)
+camera_rig = NodePath("../CameraRig")
+target_path_follower = NodePath("../Path3D/PathFollow3D")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32, 0)
+curve = ExtResource("3_xm1ld")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-4.37109e-08, 0, -0.99997, 0, 0.999977, 0, 0.999989, 0, -4.37101e-08, 75, 0, 50)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../Glider")
+
+[node name="CameraRig" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23079, 2.8812)
+
+[connection signal="noise_generated" from="Landscape" to="Clouds" method="_on_landscape_noise_generated"]
