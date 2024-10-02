@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxvdsenc0vi2a"]
+
+[ext_resource type="Script" path="res://landscape/landscape.gd" id="1_ispae"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jukki"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7a6gb"]
+sky_material = SubResource("ProceduralSkyMaterial_jukki")
+
+[sub_resource type="Environment" id="Environment_6sgki"]
+background_mode = 2
+sky = SubResource("Sky_7a6gb")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Root" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6sgki")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7453, 11.7815, 68.2665)
+
+[node name="Landscape" type="Node3D" parent="."]
+script = ExtResource("1_ispae")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
