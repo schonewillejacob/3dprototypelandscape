@@ -1,14 +1,14 @@
 extends Node3D
 
 var land : MeshInstance3D
-var mesh_scale : int
+var Y_SCALE : float = 20.0
 
 func _ready() -> void:
+	var count : Array[int] = [0]
+	
 	land = MeshInstance3D.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var count : Array[int] = [0]
-	var MESH_SCALE = 20
 	
 	var noise = FastNoiseLite.new()
 	var image = noise.get_image(512, 512)
@@ -18,10 +18,10 @@ func _ready() -> void:
 	
 	for i in range(64):
 		for j in range(64):
-			var noiseVal1 = noise.get_noise_2d(i, j) * MESH_SCALE
-			var noiseVal2 = noise.get_noise_2d(i+1, j) * MESH_SCALE
-			var noiseVal3 = noise.get_noise_2d(i+1, j+1) * MESH_SCALE
-			var noiseVal4 = noise.get_noise_2d(i, j+1) * MESH_SCALE
+			var noiseVal1 = noise.get_noise_2d(i, j)
+			var noiseVal2 = noise.get_noise_2d(i+1, j)
+			var noiseVal3 = noise.get_noise_2d(i+1, j+1)
+			var noiseVal4 = noise.get_noise_2d(i, j+1)
 			
 			
 			
@@ -46,13 +46,13 @@ func _quad(
 	noiseVal4,
 	):
 	st.set_uv( Vector2(0, 0) )
-	st.add_vertex(pt + Vector3(0, noiseVal1, 0) ) # vertex 0
+	st.add_vertex(pt + Vector3(0, noiseVal1 * Y_SCALE, 0) ) # vertex 0
 	count[0] += 1
 	st.set_uv( Vector2(1, 0) )
-	st.add_vertex(pt +  Vector3(1, noiseVal2, 0) ) # vertex 1
+	st.add_vertex(pt +  Vector3(1, noiseVal2 * Y_SCALE, 0) ) # vertex 1
 	count[0] += 1
 	st.set_uv( Vector2(1, 1) )
-	st.add_vertex(pt +  Vector3(1, noiseVal3, 1) ) # vertex 2
+	st.add_vertex(pt +  Vector3(1, noiseVal3 * Y_SCALE, 1) ) # vertex 2
 	count[0] += 1
 	st.set_uv( Vector2(0, 1) )
 	st.add_vertex(pt +  Vector3(0, noiseVal4, 1) ) # vertex 3
