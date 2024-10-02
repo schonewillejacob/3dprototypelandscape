@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvfhxgafa42on"]
 
-[ext_resource type="Script" path="res://landscape.gd" id="1_s2x87"]
+[ext_resource type="Script" path="res://landscape/landscape.gd" id="1_s2x87"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fsb2k"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
