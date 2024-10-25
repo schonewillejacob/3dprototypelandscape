@@ -48,7 +48,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Glider" parent="." node_paths=PackedStringArray("camera_rig", "target_path_follower") instance=ExtResource("2_ci8io")]
-transform = Transform3D(0.137923, 0.0600494, 0.988593, -0.0690302, 0.996233, -0.050889, -0.987978, -0.061224, 0.141564, 183.392, 13.3995, 106.596)
+transform = Transform3D(0.137901, 0.0600441, 0.988595, -0.0690195, 0.996235, -0.0508863, -0.987982, -0.0612152, 0.141542, 183.392, 13.3995, 106.596)
 camera_rig = NodePath("../CameraRig")
 target_path_follower = NodePath("../Path3D/PathFollow3D")
 
@@ -57,7 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 curve = ExtResource("3_xm1ld")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.137923, 0.0600494, 0.988593, -0.0690302, 0.996233, -0.050889, -0.987978, -0.061224, 0.141564, 183.392, 11.3995, 106.596)
+transform = Transform3D(0.137901, 0.0600441, 0.988595, -0.0690195, 0.996235, -0.0508863, -0.987982, -0.0612152, 0.141542, 183.392, 11.3995, 106.596)
 progress = 217.702
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
