@@ -1,11 +1,20 @@
+
 [gd_scene load_steps=17 format=3 uid="uid://bxvdsenc0vi2a"]
 
+
+
+[gd_scene load_steps=11 format=3 uid="uid://bxvdsenc0vi2a"]
+
+
+[ext_resource type="Script" path="res://root.gd" id="1_d52mj"]
 [ext_resource type="PackedScene" uid="uid://bqfv48bj7ivrp" path="res://landscape/landscape.tscn" id="1_sxhf2"]
 [ext_resource type="PackedScene" uid="uid://d0pbooty3jhku" path="res://glider/glider.tscn" id="2_ci8io"]
 [ext_resource type="Script" path="res://environment/clouds.gd" id="2_t3g5x"]
+
 [ext_resource type="Texture2D" uid="uid://brsogufmomnjd" path="res://streak.png" id="3_o3t2g"]
 [ext_resource type="Curve3D" uid="uid://cofu0jmgkqhc1" path="res://glider/glider_curve.tres" id="3_xm1ld"]
 [ext_resource type="Texture2D" uid="uid://6b7jmyyfpoe6" path="res://smoke-particle-png-1.png" id="5_2rnqd"]
+
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_w2wsm"]
 size = Vector2(256, 256)
@@ -23,28 +32,12 @@ sky = SubResource("Sky_7a6gb")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8p5tc"]
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 8.0
-emission_ring_radius = 1.1
-emission_ring_inner_radius = 5.0
-inherit_velocity_ratio = 0.102
-spread = 10.843
-initial_velocity_min = -0.1
-initial_velocity_max = 0.5
-scale_min = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klrki"]
-transparency = 1
-cull_mode = 2
-albedo_texture = ExtResource("3_o3t2g")
-use_point_size = true
-point_size = 0.3
+[sub_resource type="CylinderMesh" id="CylinderMesh_ynyix"]
 
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_2qa34"]
-material = SubResource("StandardMaterial3D_klrki")
-size = 13.381
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1mju"]
+albedo_color = Color(1, 0.0901961, 1, 1)
+
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uxugy"]
 emission_shape_scale = Vector3(1, 0, 0)
@@ -61,6 +54,7 @@ material = SubResource("StandardMaterial3D_fsvou")
 size = Vector2(0.3, 0.3)
 
 [node name="Root" type="Node3D"]
+script = ExtResource("1_d52mj")
 
 [node name="Clouds" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.689, 5.4154, 129.257)
@@ -84,6 +78,7 @@ environment = SubResource("Environment_6sgki")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
+
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Environment"]
 transform = Transform3D(29.0146, 0, 0, 0, 3.58569, 0, 0, 0, 30.7806, 120.089, 10.6907, 125.242)
@@ -119,9 +114,15 @@ progress = 217.702
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
 remote_path = NodePath("../../../Glider")
 
+
+
 [node name="CameraRig" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig"]
-transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, 1, 8.74228e-08, -8.74228e-08, -8.74228e-08, 1, 0, 1, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_ynyix")
+surface_material_override/0 = SubResource("StandardMaterial3D_b1mju")
 
 [connection signal="noise_generated" from="Landscape" to="Clouds" method="_on_landscape_noise_generated"]
