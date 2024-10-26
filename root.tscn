@@ -1,9 +1,12 @@
+
 [gd_scene load_steps=11 format=3 uid="uid://bxvdsenc0vi2a"]
+
 
 [ext_resource type="Script" path="res://root.gd" id="1_d52mj"]
 [ext_resource type="PackedScene" uid="uid://bqfv48bj7ivrp" path="res://landscape/landscape.tscn" id="1_sxhf2"]
 [ext_resource type="PackedScene" uid="uid://d0pbooty3jhku" path="res://glider/glider.tscn" id="2_ci8io"]
 [ext_resource type="Script" path="res://environment/clouds.gd" id="2_t3g5x"]
+
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_w2wsm"]
 size = Vector2(256, 256)
@@ -21,16 +24,18 @@ sky = SubResource("Sky_7a6gb")
 tonemap_mode = 2
 glow_enabled = true
 
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_ynyix"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1mju"]
 albedo_color = Color(1, 0.0901961, 1, 1)
 
+
 [node name="Root" type="Node3D"]
 script = ExtResource("1_d52mj")
 
 [node name="Clouds" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0.2, 128)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.689, 5.4154, 129.257)
 mesh = SubResource("PlaneMesh_w2wsm")
 script = ExtResource("2_t3g5x")
 
@@ -53,8 +58,10 @@ environment = SubResource("Environment_6sgki")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
+
 [node name="Glider" parent="." instance=ExtResource("2_ci8io")]
 transform = Transform3D(0.137901, 0.060044, 0.988596, -0.0690195, 0.996234, -0.0508864, -0.987982, -0.0612151, 0.141542, 183.392, 13.3995, 106.596)
+
 
 [node name="CameraRig" type="Node3D" parent="."]
 

@@ -1,7 +1,16 @@
-[gd_scene load_steps=6 format=4 uid="uid://d0pbooty3jhku"]
+[gd_scene load_steps=8 format=4 uid="uid://d0pbooty3jhku"]
 
 [ext_resource type="Script" path="res://glider/glider.gd" id="1_c1lgt"]
-[ext_resource type="Material" uid="uid://corji3hplnbm2" path="res://glider/glider_material.tres" id="2_oqo5b"]
+[ext_resource type="FontFile" uid="uid://2334k2jdlmsp" path="res://Logos-Regular.otf" id="2_nlfts"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2thtb"]
+viewport_path = NodePath("Control/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_liudx"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_2thtb")
+clearcoat = 0.5
+clearcoat_roughness = 0.16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u3x6k"]
 resource_name = "glaze"
@@ -26,6 +35,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bsvpe"]
+resource_local_to_scene = true
 resource_name = "glider_glider"
 _surfaces = [{
 "aabb": AABB(-1000.14, -582.09, -218.427, 2000.28, 854.815, 218.427),
@@ -49,6 +59,38 @@ script = ExtResource("1_c1lgt")
 
 [node name="GliderMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.001, -1.50996e-10, 6.60024e-18, 0, -4.37114e-11, -0.001, 1.50996e-10, -0.001, 4.37114e-11, 0, 0, 0)
-material_override = ExtResource("2_oqo5b")
+material_override = SubResource("StandardMaterial3D_liudx")
 mesh = SubResource("ArrayMesh_bsvpe")
 skeleton = NodePath("")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="Control"]
+
+[node name="Label" type="Label" parent="Control/SubViewport"]
+offset_right = 2960.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("2_nlfts")
+text = "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  R
+
+
+                      O"
