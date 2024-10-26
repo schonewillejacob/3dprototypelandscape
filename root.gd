@@ -124,29 +124,5 @@ func _process(delta):
 	t = (t + delta * speed) if (t < 10) else 0
 	pfollow.progress_ratio = t / 10.0
 
-	skip += 1
-	if (skip % 10 == 0):
-		var k = floor(n * t / 10.0)
-		curr = pts[len(pts) - 1] if k > len(pts) - 2 else pts[k]
-		next = pts[0] if k > len(pts) - 2 else pts[k + 1]
-		forward = (next - curr).normalized()
-
-	# Ensure forward vector is not zero
-	if forward.length() > 0:  
-		var baked_points = path.curve.get_baked_points()
-		
-		# Calculate the current index based on progress
-		var current_index = floor(pfollow.progress_ratio * (baked_points.size() - 1))
-		var next_index = min(current_index + 1, baked_points.size() - 1)
-
-		# Get the tangent vector
-		var tangent = (baked_points[next_index] - baked_points[current_index]).normalized()
-
-		# Create a rotation basis using the tangent vector
-		var rotation_basis = Basis(Vector3(0, 1, 0), atan2(tangent.x, tangent.z))
-		
-		glider.transform.basis = rotation_basis
-		
-		# glider face
-		glider.look_at(pfollow.position + tangent * 10)
-		
+	glider.transform.basis = Basis(Vector3(0, 1, 0), PI) * Transform3D.IDENTITY.basis  # Rotate about y-axis by 180 degrees
+	glider.transform.basis=Basis(Vector3(0, 1, 0), PI) *Basis(Vector3(0, 0, 1),sin(t * 2 * PI / 5) * -PI / 8.0)* 	glider.transform.basis
