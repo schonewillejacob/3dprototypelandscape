@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://d0pbooty3jhku"]
+[gd_scene load_steps=8 format=4 uid="uid://d0pbooty3jhku"]
 
 [ext_resource type="Script" path="res://glider/glider.gd" id="1_c1lgt"]
+[ext_resource type="FontFile" uid="uid://2334k2jdlmsp" path="res://Logos-Regular.otf" id="2_nlfts"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2thtb"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("Control/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_liudx"]
 resource_local_to_scene = true
@@ -62,11 +63,34 @@ material_override = SubResource("StandardMaterial3D_liudx")
 mesh = SubResource("ArrayMesh_bsvpe")
 skeleton = NodePath("")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="SubViewport"]
+[node name="SubViewport" type="SubViewport" parent="Control"]
+
+[node name="Label" type="Label" parent="Control/SubViewport"]
 offset_right = 2960.0
 offset_bottom = 87.0
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("2_nlfts")
 text = "
-fsad TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  R
+
+
+                      O"
