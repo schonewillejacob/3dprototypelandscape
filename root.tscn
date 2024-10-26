@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxvdsenc0vi2a"]
+[gd_scene load_steps=17 format=3 uid="uid://bxvdsenc0vi2a"]
 
 [ext_resource type="PackedScene" uid="uid://bqfv48bj7ivrp" path="res://landscape/landscape.tscn" id="1_sxhf2"]
 [ext_resource type="PackedScene" uid="uid://d0pbooty3jhku" path="res://glider/glider.tscn" id="2_ci8io"]
 [ext_resource type="Script" path="res://environment/clouds.gd" id="2_t3g5x"]
 [ext_resource type="Texture2D" uid="uid://brsogufmomnjd" path="res://streak.png" id="3_o3t2g"]
 [ext_resource type="Curve3D" uid="uid://cofu0jmgkqhc1" path="res://glider/glider_curve.tres" id="3_xm1ld"]
+[ext_resource type="Texture2D" uid="uid://6b7jmyyfpoe6" path="res://smoke-particle-png-1.png" id="5_2rnqd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_w2wsm"]
 size = Vector2(256, 256)
@@ -45,6 +46,20 @@ point_size = 0.3
 material = SubResource("StandardMaterial3D_klrki")
 size = 13.381
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uxugy"]
+emission_shape_scale = Vector3(1, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsvou"]
+transparency = 1
+albedo_texture = ExtResource("5_2rnqd")
+albedo_texture_force_srgb = true
+billboard_mode = 1
+distance_fade_mode = 3
+
+[sub_resource type="QuadMesh" id="QuadMesh_a5008"]
+material = SubResource("StandardMaterial3D_fsvou")
+size = Vector2(0.3, 0.3)
+
 [node name="Root" type="Node3D"]
 
 [node name="Clouds" type="MeshInstance3D" parent="."]
@@ -53,7 +68,6 @@ mesh = SubResource("PlaneMesh_w2wsm")
 script = ExtResource("2_t3g5x")
 
 [node name="CloudNoisePreview" type="TextureRect" parent="Clouds"]
-visible = false
 offset_left = 32.0
 offset_top = 160.0
 offset_right = 128.0
@@ -79,21 +93,27 @@ process_material = SubResource("ParticleProcessMaterial_8p5tc")
 draw_pass_1 = SubResource("RibbonTrailMesh_2qa34")
 
 [node name="Glider" parent="." node_paths=PackedStringArray("camera_rig", "target_path_follower") instance=ExtResource("2_ci8io")]
-
 transform = Transform3D(0.137901, 0.0600441, 0.988595, -0.0690195, 0.996235, -0.0508863, -0.987982, -0.0612152, 0.141542, 183.392, 13.3995, 106.596)
-
 camera_rig = NodePath("../CameraRig")
 target_path_follower = NodePath("../Path3D/PathFollow3D")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Glider"]
+transform = Transform3D(1, -2.23517e-08, 5.96046e-08, -3.72529e-09, 1, -9.31323e-09, 1.49012e-08, 0, 1, -0.00482941, 0.0278854, 0.552521)
+amount = 50
+lifetime = 0.12
+interp_to_end = 0.15
+randomness = 0.3
+fixed_fps = 56
+visibility_aabb = AABB(-4, -4, -4, 5, 8, 8)
+process_material = SubResource("ParticleProcessMaterial_uxugy")
+draw_pass_1 = SubResource("QuadMesh_a5008")
 
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 curve = ExtResource("3_xm1ld")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-
-
 transform = Transform3D(0.137901, 0.0600441, 0.988595, -0.0690195, 0.996235, -0.0508863, -0.987982, -0.0612152, 0.141542, 183.392, 11.3995, 106.596)
-
 progress = 217.702
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
