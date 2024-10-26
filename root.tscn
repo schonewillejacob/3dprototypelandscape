@@ -79,7 +79,9 @@ process_material = SubResource("ParticleProcessMaterial_8p5tc")
 draw_pass_1 = SubResource("RibbonTrailMesh_2qa34")
 
 [node name="Glider" parent="." node_paths=PackedStringArray("camera_rig", "target_path_follower") instance=ExtResource("2_ci8io")]
-transform = Transform3D(0.137901, 0.0600439, 0.988595, -0.0690187, 0.996234, -0.0508864, -0.987981, -0.0612144, 0.141542, 183.392, 13.3995, 106.596)
+
+transform = Transform3D(0.137901, 0.0600441, 0.988595, -0.0690195, 0.996235, -0.0508863, -0.987982, -0.0612152, 0.141542, 183.392, 13.3995, 106.596)
+
 camera_rig = NodePath("../CameraRig")
 target_path_follower = NodePath("../Path3D/PathFollow3D")
 
@@ -88,7 +90,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 curve = ExtResource("3_xm1ld")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.137901, 0.0600439, 0.988595, -0.0690187, 0.996234, -0.0508864, -0.987981, -0.0612144, 0.141542, 183.392, 11.3995, 106.596)
+
+
+transform = Transform3D(0.137901, 0.0600441, 0.988595, -0.0690195, 0.996235, -0.0508863, -0.987982, -0.0612152, 0.141542, 183.392, 11.3995, 106.596)
+
 progress = 217.702
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
